@@ -1,0 +1,11 @@
+:host {
+  height: 400px;
+  width: 400px;
+  display: block;
+}
+
+#diagramDiv {
+  display: block;
+  height: 100%;
+  width: 100%;
+}

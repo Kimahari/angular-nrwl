@@ -1,0 +1,25 @@
+{
+  "npmScope": "myworkspace",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "some-app": {
+      "tags": []
+    },
+    "some-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["some-app"]
+    },
+    "go-js-lib": {
+      "tags": []
+    }
+  }
+}
