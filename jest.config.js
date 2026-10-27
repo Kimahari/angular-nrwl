@@ -1,10 +1,3 @@
 module.exports = {
-  testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
-  transform: {
-    '^.+\\.(ts|js|html)$': 'ts-jest'
-  },
-  resolver: '@nrwl/jest/plugins/resolver',
-  moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageReporters: ['html'],
-  passWithNoTests: true
+  projects: ['<rootDir>/apps/some-app/jest.config.js', '<rootDir>/libs/go-js-lib/jest.config.js']
 };

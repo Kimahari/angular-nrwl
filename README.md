@@ -1,5 +1,31 @@
 # Myworkspace
 
+## Dependency compatibility update
+
+Use Node 22 (the tested version is pinned in `.nvmrc`) and npm 10 or newer.
+The Angular packages are aligned at 19.2.16, with Nx 20.8.4 and TypeScript 5.8.3.
+Nx uses the project definitions in `apps/*/project.json` and `libs/*/project.json`.
+The older generated documentation below predates this tooling update; use these commands:
+
+```powershell
+npm ci
+npm run build
+npm run build -- --configuration=production
+npm test -- --skip-nx-cache
+npm run lint -- --skip-nx-cache
+npm run e2e -- --skip-nx-cache
+```
+
+Unit and Cypress tests verify the actual library diagram, including its initialized
+canvas, rather than the removed welcome-heading scaffold. Jest uses a canvas helper
+so the real GoJS component can initialize in the unit test environment.
+
+ESLint 9 replaces TSLint and Codelyzer. All three projects use Nx lint targets with
+TypeScript rules and module-boundary checks; the Angular app and library also lint
+external and inline templates. The existing NgModule architecture is explicitly
+allowed. Lint fails on any warning. Edit the root and project `eslint.config.mjs`
+files to change these rules.
+
 This project was generated using [Nx](https://nx.dev).
 
 <p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>

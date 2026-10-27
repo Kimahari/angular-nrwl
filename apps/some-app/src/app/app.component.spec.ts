@@ -1,31 +1,39 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { GoJsLibModule } from '@myworkspace/go-js-lib';
+import type { Diagram } from 'gojs';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent]
+      declarations: [AppComponent],
+      imports: [GoJsLibModule]
     }).compileComponents();
   }));
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
   it(`should have as title 'some-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('some-app');
+    expect(fixture.componentInstance.title).toEqual('some-app');
   });
 
-  it('should render title', () => {
+  it('should initialize the library diagram in its canvas container', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain(
-      'Welcome to some-app!'
-    );
+    const diagramElement = fixture.debugElement.query(By.css('myworkspace-my-component'));
+    const diagram: Diagram = diagramElement.componentInstance.diagram;
+    const container = diagramElement.nativeElement.querySelector('#diagramDiv');
+
+    expect(container).toBeTruthy();
+    expect(diagram.div).toBe(container);
+    expect(diagram.model.nodeDataArray).toEqual([
+      expect.objectContaining({ id: 'asdf', name: 'asdfasdf' })
+    ]);
+    expect(container.querySelector('canvas')).toBeTruthy();
   });
 });

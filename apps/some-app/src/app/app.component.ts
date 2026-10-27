@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'myworkspace-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

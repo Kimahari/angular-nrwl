@@ -4,7 +4,7 @@
     "some-app": {
       "projectType": "application",
       "schematics": {
-        "@nrwl/angular:component": {
+        "@nx/angular:component": {
           "style": "scss"
         }
       },
@@ -20,12 +20,14 @@
             "main": "apps/some-app/src/main.ts",
             "polyfills": "apps/some-app/src/polyfills.ts",
             "tsConfig": "apps/some-app/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "apps/some-app/src/favicon.ico",
               "apps/some-app/src/assets"
             ],
-            "styles": ["apps/some-app/src/styles.scss"],
+            "styles": [
+              "apps/some-app/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -39,7 +41,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -63,36 +64,34 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "some-app:build"
+            "buildTarget": "some-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "some-app:build:production"
+              "buildTarget": "some-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "some-app:build"
+            "buildTarget": "some-app:build"
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nx/eslint:lint",
           "options": {
-            "tsConfig": [
-              "apps/some-app/tsconfig.app.json",
-              "apps/some-app/tsconfig.spec.json"
+            "lintFilePatterns": [
+              "apps/some-app/**/*.ts",
+              "apps/some-app/**/*.html"
             ],
-            "exclude": ["**/node_modules/**", "!apps/some-app/**"]
+            "maxWarnings": 0
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "builder": "@nx/jest:jest",
           "options": {
-            "jestConfig": "apps/some-app/jest.config.js",
-            "tsConfig": "apps/some-app/tsconfig.spec.json",
-            "setupFile": "apps/some-app/src/test-setup.ts"
+            "jestConfig": "apps/some-app/jest.config.js"
           }
         }
       }
@@ -103,10 +102,9 @@
       "projectType": "application",
       "architect": {
         "e2e": {
-          "builder": "@nrwl/cypress:cypress",
+          "builder": "@nx/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/some-app-e2e/cypress.json",
-            "tsConfig": "apps/some-app-e2e/tsconfig.e2e.json",
+            "cypressConfig": "apps/some-app-e2e/cypress.config.ts",
             "devServerTarget": "some-app:serve"
           },
           "configurations": {
@@ -116,10 +114,13 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nx/eslint:lint",
           "options": {
-            "tsConfig": ["apps/some-app-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/some-app-e2e/**"]
+            "lintFilePatterns": [
+              "apps/some-app-e2e/**/*.ts",
+              "apps/some-app-e2e/**/*.html"
+            ],
+            "maxWarnings": 0
           }
         }
       }
@@ -131,21 +132,19 @@
       "prefix": "myworkspace",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nx/eslint:lint",
           "options": {
-            "tsConfig": [
-              "libs/go-js-lib/tsconfig.lib.json",
-              "libs/go-js-lib/tsconfig.spec.json"
+            "lintFilePatterns": [
+              "libs/go-js-lib/**/*.ts",
+              "libs/go-js-lib/**/*.html"
             ],
-            "exclude": ["**/node_modules/**", "!libs/go-js-lib/**"]
+            "maxWarnings": 0
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "builder": "@nx/jest:jest",
           "options": {
-            "jestConfig": "libs/go-js-lib/jest.config.js",
-            "tsConfig": "libs/go-js-lib/tsconfig.spec.json",
-            "setupFile": "libs/go-js-lib/src/test-setup.ts"
+            "jestConfig": "libs/go-js-lib/jest.config.js"
           }
         }
       },
@@ -153,16 +152,17 @@
     }
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "schematicCollections": [
+      "@nx/angular"
+    ]
   },
   "schematics": {
-    "@nrwl/angular:application": {
+    "@nx/angular:application": {
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
-    "@nrwl/angular:library": {
+    "@nx/angular:library": {
       "unitTestRunner": "jest"
     }
-  },
-  "defaultProject": "some-app"
+  }
 }

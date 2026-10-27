@@ -1,1 +1,1 @@
-export const getGreeting = () => cy.get('h1');
+export const getDiagram = () => cy.get('myworkspace-my-component #diagramDiv');
