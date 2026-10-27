@@ -11,19 +11,18 @@ import * as go from 'gojs';
 const Make = go.GraphObject.make;
 
 @Component({
+  standalone: false,
   selector: 'myworkspace-my-internal-diagram',
   templateUrl: './my-internal-diagram.component.html',
   styleUrls: ['./my-internal-diagram.component.css']
 })
 export class MyInternalDiagramComponent implements OnInit, AfterViewInit {
-  diagram: any;
-
-  constructor() {}
+  diagram: go.Diagram;
 
   @ViewChild('diagramDiv') diagramRef: ElementRef;
 
   ngOnInit() {
-    (go as any).licenseKey = 'LicenseKeyGoesHere'; //Not Being Applied
+    (go as unknown as { licenseKey: string }).licenseKey = 'LicenseKeyGoesHere'; //Not Being Applied
   }
 
   ngAfterViewInit() {

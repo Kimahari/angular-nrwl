@@ -1,25 +1,30 @@
 {
-  "npmScope": "myworkspace",
-  "implicitDependencies": {
-    "angular.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
-    "tsconfig.json": "*",
-    "tslint.json": "*",
-    "nx.json": "*"
+  "defaultBase": "master",
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "sharedGlobals": [
+      "{workspaceRoot}/tsconfig.json"
+    ]
   },
-  "projects": {
-    "some-app": {
-      "tags": []
+  "targetDefaults": {
+    "build": {
+      "cache": true
     },
-    "some-app-e2e": {
-      "tags": [],
-      "implicitDependencies": ["some-app"]
+    "test": {
+      "cache": true
     },
-    "go-js-lib": {
-      "tags": []
+    "e2e": {
+      "cache": false
+    },
+    "@nx/eslint:lint": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "{workspaceRoot}/eslint.config.mjs"
+      ]
     }
   }
 }

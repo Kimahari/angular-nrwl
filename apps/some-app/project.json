@@ -1,0 +1,96 @@
+{
+  "name": "some-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "schematics": {
+    "@nx/angular:component": {
+      "style": "scss"
+    }
+  },
+  "sourceRoot": "apps/some-app/src",
+  "prefix": "myworkspace",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/some-app",
+        "index": "apps/some-app/src/index.html",
+        "main": "apps/some-app/src/main.ts",
+        "polyfills": "apps/some-app/src/polyfills.ts",
+        "tsConfig": "apps/some-app/tsconfig.app.json",
+        "aot": true,
+        "assets": [
+          "apps/some-app/src/favicon.ico",
+          "apps/some-app/src/assets"
+        ],
+        "styles": [
+          "apps/some-app/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/some-app/src/environments/environment.ts",
+              "with": "apps/some-app/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "aot": true,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "buildTarget": "some-app:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "some-app:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "some-app:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/some-app/**/*.ts",
+          "apps/some-app/**/*.html"
+        ],
+        "maxWarnings": 0
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/some-app/jest.config.js"
+      }
+    }
+  }
+}

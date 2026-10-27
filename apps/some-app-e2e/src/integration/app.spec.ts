@@ -1,13 +1,15 @@
-import { getGreeting } from '../support/app.po';
+import { getDiagram } from '../support/app.po';
 
 describe('some-app', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
-
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to some-app!');
+  it('should render the library diagram with an initialized canvas', () => {
+    getDiagram().should('be.visible').within(() => {
+      cy.get('canvas').should('be.visible').and(($canvas) => {
+        const canvas = $canvas[0] as HTMLCanvasElement;
+        expect(canvas.width).to.be.greaterThan(0);
+        expect(canvas.height).to.be.greaterThan(0);
+      });
+    });
   });
 });
