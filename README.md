@@ -4,8 +4,12 @@
 
 Use Node 22 (the tested version is pinned in `.nvmrc`) and npm 10 or newer.
 The Angular framework packages are aligned at 20.3.35, with Angular CLI/build
-tooling 20.3.42, Nx 22.7.10, Jest 30.2.0, and TypeScript 5.8.3.
-Nx uses the project definitions in `apps/*/project.json` and `libs/*/project.json`.
+tooling 20.3.42, Nx 24.0.3, Cypress 16.2.1, Jest 30.2.0, and TypeScript 5.8.3.
+Nx uses the project definitions in `apps/*/project.json` and `libs/*/project.json`,
+with Jest, ESLint, and Cypress targets inferred from their configuration files.
+The legacy `angular.json` retains Angular build/serve definitions, but no longer
+registers the Nx executors removed in Nx 24. Use the Nx commands below for tests
+and lint. Both default and production Cypress targets start the matching app server.
 The older generated documentation below predates this tooling update; use these commands:
 
 ```powershell

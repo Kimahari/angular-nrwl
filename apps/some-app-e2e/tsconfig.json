@@ -1,7 +1,18 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "types": ["cypress", "node"]
+    "types": [
+      "cypress",
+      "node"
+    ],
+    "moduleResolution": "bundler",
+    "typeRoots": [
+      "../../node_modules/@types",
+      "../../node_modules"
+    ]
   },
-  "include": ["**/*.ts", "**/*.js"]
+  "include": [
+    "**/*.ts",
+    "**/*.js"
+  ]
 }

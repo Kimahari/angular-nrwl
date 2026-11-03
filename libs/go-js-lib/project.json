@@ -4,24 +4,6 @@
   "projectType": "library",
   "sourceRoot": "libs/go-js-lib/src",
   "prefix": "myworkspace",
-  "schematics": {},
-  "targets": {
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/go-js-lib/**/*.ts",
-          "libs/go-js-lib/**/*.html"
-        ],
-        "maxWarnings": 0
-      }
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "options": {
-        "jestConfig": "libs/go-js-lib/jest.config.js",
-        "tsConfig": "libs/go-js-lib/tsconfig.spec.json"
-      }
-    }
-  }
+  "targets": {},
+  "generators": {}
 }
