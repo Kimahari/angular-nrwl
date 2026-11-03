@@ -5,7 +5,18 @@
     "types": [],
     "moduleResolution": "bundler"
   },
-  "files": ["src/main.ts", "src/polyfills.ts"],
-  "include": ["**/*.ts"],
-  "exclude": ["src/test-setup.ts", "**/*.spec.ts"]
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "src/test-setup.ts",
+    "**/*.spec.ts"
+  ],
+  "angularCompilerOptions": {
+    "strictTemplates": false
+  }
 }

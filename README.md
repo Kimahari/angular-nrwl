@@ -2,9 +2,10 @@
 
 ## Dependency compatibility update
 
-Use Node 22 (the tested version is pinned in `.nvmrc`) and npm 10 or newer.
-The Angular framework packages are aligned at 20.3.35, with Angular CLI/build
-tooling 20.3.42, Nx 24.0.3, Cypress 16.2.1, Jest 30.2.0, and TypeScript 5.8.3.
+Use Node 22.22.3 or newer within the Node 22 release line (the tested version is
+pinned in `.nvmrc`) and npm 10 or newer.
+The Angular framework packages are aligned at 22.2.4, with Angular CLI/build
+tooling 22.2.5, Nx 24.0.3, Cypress 16.2.1, Jest 30.5.2, and TypeScript 6.0.3.
 Nx uses the project definitions in `apps/*/project.json` and `libs/*/project.json`,
 with Jest, ESLint, and Cypress targets inferred from their configuration files.
 The legacy `angular.json` retains Angular build/serve definitions, but no longer
@@ -38,6 +39,22 @@ TypeScript rules and module-boundary checks; the Angular app and library also li
 external and inline templates. The existing NgModule architecture is explicitly
 allowed. Lint fails on any warning. Edit the root and project `eslint.config.mjs`
 files to change these rules.
+
+### Angular 22 migration notes
+
+The Angular 22 core and CLI migrations were applied, with the Angular 21
+zone-bootstrap migration also applied. Explicit zone-based change detection and
+`ChangeDetectionStrategy.Eager` preserve existing application behavior. The new
+Angular ESLint preference for OnPush is disabled for these migrated components;
+other existing lint checks remain enabled. Template strictness retains its prior
+setting. TypeScript 6 uses bundler resolution for application code and NodeNext
+resolution for Jest, with isolated test transforms.
+
+The builder update replaces the old SockJS development-server stack, removing
+`uuid` and the dependency reported by Dependabot #25 entirely. Babel 7 is retained
+for Jest/Nx while a narrowly scoped override gives the Babel 8 polyfill provider
+its matching Babel 8 core. This avoids npm hoisting incompatible Babel peers;
+do not remove it without verifying a clean `npm ci` and `npm ls --all`.
 
 This project was generated using [Nx](https://nx.dev).
 

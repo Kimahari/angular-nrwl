@@ -3,7 +3,8 @@ import {
   OnInit,
   AfterViewInit,
   ViewChild,
-  ElementRef
+  ElementRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import * as go from 'gojs';
@@ -14,12 +15,14 @@ const Make = go.GraphObject.make;
   standalone: false,
   selector: 'myworkspace-my-internal-diagram',
   templateUrl: './my-internal-diagram.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./my-internal-diagram.component.css']
 })
 export class MyInternalDiagramComponent implements OnInit, AfterViewInit {
-  diagram: go.Diagram;
+  // Initialized after Angular resolves the view query in ngAfterViewInit.
+  diagram!: go.Diagram;
 
-  @ViewChild('diagramDiv') diagramRef: ElementRef;
+  @ViewChild('diagramDiv') diagramRef!: ElementRef<HTMLDivElement>;
 
   ngOnInit() {
     (go as unknown as { licenseKey: string }).licenseKey = 'LicenseKeyGoesHere'; //Not Being Applied
