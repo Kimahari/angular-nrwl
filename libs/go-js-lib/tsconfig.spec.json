@@ -2,12 +2,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "module": "commonjs",
+    "module": "NodeNext",
     "types": [
       "jest",
       "node"
     ],
-    "target": "ES2016"
+    "target": "ES2016",
+    "moduleResolution": "NodeNext",
+    "isolatedModules": true,
+    "emitDecoratorMetadata": false
   },
   "files": [
     "src/test-setup.ts"

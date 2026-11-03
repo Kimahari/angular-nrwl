@@ -12,6 +12,8 @@ export default [
         rules: {
             // This migration preserves the existing NgModule architecture.
             "@angular-eslint/prefer-standalone": "off",
+            // Angular 22 migration retains the pre-upgrade eager change detection.
+            "@angular-eslint/prefer-on-push-component-change-detection": "off",
             "@angular-eslint/directive-selector": [
                 "error",
                 {

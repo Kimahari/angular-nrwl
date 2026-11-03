@@ -4,7 +4,7 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
@@ -19,10 +19,9 @@
     ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
     "paths": {
       "@myworkspace/go-js-lib": [
-        "libs/go-js-lib/src/index.ts"
+        "./libs/go-js-lib/src/index.ts"
       ]
     },
     "useDefineForClassFields": false
