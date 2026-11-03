@@ -3,7 +3,8 @@
 ## Dependency compatibility update
 
 Use Node 22 (the tested version is pinned in `.nvmrc`) and npm 10 or newer.
-The Angular packages are aligned at 19.2.16, with Nx 20.8.4 and TypeScript 5.8.3.
+The Angular framework packages are aligned at 20.3.35, with Angular CLI/build
+tooling 20.3.42, Nx 22.7.10, Jest 30.2.0, and TypeScript 5.8.3.
 Nx uses the project definitions in `apps/*/project.json` and `libs/*/project.json`.
 The older generated documentation below predates this tooling update; use these commands:
 
@@ -14,7 +15,15 @@ npm run build -- --configuration=production
 npm test -- --skip-nx-cache
 npm run lint -- --skip-nx-cache
 npm run e2e -- --skip-nx-cache
+npm audit --omit=dev
+npm audit
 ```
+
+The production dependency audit is clean after this update. The full audit still
+reports development-tooling findings; do not use `npm audit fix --force` to clear
+them, because its suggested major upgrades and downgrades can break this package
+set. Cypress needs its separately downloaded browser binary to run end-to-end
+tests (`npx cypress install` if it is missing).
 
 Unit and Cypress tests verify the actual library diagram, including its initialized
 canvas, rather than the removed welcome-heading scaffold. Jest uses a canvas helper
