@@ -19,7 +19,8 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/go-js-lib/jest.config.js"
+        "jestConfig": "libs/go-js-lib/jest.config.js",
+        "tsConfig": "libs/go-js-lib/tsconfig.spec.json"
       }
     }
   }
